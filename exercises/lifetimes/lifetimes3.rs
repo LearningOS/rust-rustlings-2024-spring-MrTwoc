@@ -5,15 +5,14 @@
 // Execute `rustlings hint lifetimes3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
-struct Book {
-    author: &str,
-    title: &str,
+struct Book<'a> {
+    author: &'a str,
+    title: &'a str,
 }
 
 fn main() {
-    let name = String::from("Jill Smith");
+    let name = String::from("Jill Smith1");
     let title = String::from("Fish Flying");
     let book = Book { author: &name, title: &title };
 
