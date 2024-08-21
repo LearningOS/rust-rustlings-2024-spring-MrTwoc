@@ -3,7 +3,8 @@
 	This problem requires you to implement a basic BFS algorithm
 */
 
-//I AM NOT DONE
+
+
 use std::collections::VecDeque;
 
 // Define a graph
@@ -25,12 +26,32 @@ impl Graph {
         self.adj[dest].push(src); 
     }
 
+    /**
+     * BFS:
+     * 广度优先搜索（也称宽度优先搜索，缩写BFS，以下采用广度来描述）是连通图的一种遍历策略。
+     * 因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域，因此得名。
+     */
     // Perform a breadth-first search on the graph, return the order of visited nodes
     fn bfs_with_return(&self, start: usize) -> Vec<usize> {
-        
 		//TODO
+        // let mut visit_order = vec![];
+        // visit_order
+        let mut visit_order = Vec::new();
+        let mut visited = vec![false; self.adj.len()];
+        let mut queue = VecDeque::new();
 
-        let mut visit_order = vec![];
+        visited[start] = true;
+        queue.push_back(start);
+
+        while let Some(node) = queue.pop_front() {
+            visit_order.push(node);
+            for &neighbor in self.adj[node].iter() {
+                if !visited[neighbor] {
+                    visited[neighbor] = true;
+                    queue.push_back(neighbor);
+                }
+            }
+        }
         visit_order
     }
 }

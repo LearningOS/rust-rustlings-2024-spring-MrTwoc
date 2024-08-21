@@ -3,7 +3,7 @@
 	This problem requires you to implement a basic DFS traversal
 */
 
-// I AM NOT DONE
+
 use std::collections::HashSet;
 
 struct Graph {
@@ -22,8 +22,24 @@ impl Graph {
         self.adj[dest].push(src); 
     }
 
+    /**
+     * dfs:
+     * 深度优先搜索算法（Depth First Search，简称DFS）：一种用于遍历或搜索树或图的算法。 
+     * 沿着树的深度遍历树的节点，尽可能深的搜索树的分支。当节点v的所在边都己被探寻过或者在搜寻时结点不满足条件，
+     * 搜索将回溯到发现节点v的那条边的起始节点。
+     * 整个进程反复进行直到所有节点都被访问为止。
+     * 属于盲目搜索,最糟糕的情况算法时间复杂度为O(!n)。
+     */
     fn dfs_util(&self, v: usize, visited: &mut HashSet<usize>, visit_order: &mut Vec<usize>) {
         //TODO
+        visited.insert(v);
+        visit_order.push(v);
+
+        for &i in &self.adj[v] {
+            if !visited.contains(&i) {
+                self.dfs_util(i, visited, visit_order);
+            }
+        }
     }
 
     // Perform a depth-first search on the graph, return the order of visited nodes
